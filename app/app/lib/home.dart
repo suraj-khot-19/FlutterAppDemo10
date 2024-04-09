@@ -30,7 +30,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Api Intgration 3"),
+        backgroundColor: Colors.pink,
+        title: Center(child: const Text("Api Intgration 3")),
       ),
       body: Column(
         children: [
@@ -45,13 +46,33 @@ class _MyHomePageState extends State<MyHomePage> {
                     itemCount: userList.length,
                     itemBuilder: (context, index) {
                       return Card(
+                        color: const Color.fromARGB(255, 173, 212, 244),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             children: [
                               ReusableRow(
-                                title: 'user name',
+                                title: 'name',
                                 value: snapshot.data![index].name.toString(),
+                              ),
+                              ReusableRow(
+                                title: 'user name',
+                                value:
+                                    snapshot.data![index].username.toString(),
+                              ),
+                              ReusableRow(
+                                title: 'email',
+                                value: snapshot.data![index].email.toString(),
+                              ),
+                              ReusableRow(
+                                title: 'city',
+                                value: snapshot.data![index].address!.city
+                                    .toString(),
+                              ),
+                              ReusableRow(
+                                title: 'latitude',
+                                value: snapshot.data![index].address!.geo!.lat
+                                    .toString(),
                               ),
                             ],
                           ),
@@ -76,12 +97,15 @@ class ReusableRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(title),
-        Text(value),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(title),
+          Text(value),
+        ],
+      ),
     );
   }
 }
